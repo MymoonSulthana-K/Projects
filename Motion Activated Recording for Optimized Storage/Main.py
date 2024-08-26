@@ -16,7 +16,7 @@ movetime = []
 df = pandas.DataFrame(columns = ["Start", "End"])
 
 # Capturing video
-url="http://192.168.1.2:8080/video"
+url="http://.168.1.2:8080/video" #url to the cam or use webcam
 video = cv2.VideoCapture(url)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 name=str(datetime.now())
