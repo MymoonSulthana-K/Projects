@@ -23,7 +23,7 @@ movetime = []
 df = pandas.DataFrame(columns=["Start", "End"])
 
 # Capturing video
-url="http://192.168.1.3:8080/video"
+#url="" Ip cam goes here
 video = cv2.VideoCapture(url)#0 for webcam
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
 name = str(datetime.now()).replace(':', "-")[:19]
