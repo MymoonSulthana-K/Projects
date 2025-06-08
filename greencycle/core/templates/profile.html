@@ -1,0 +1,114 @@
+{% load static %}
+{% load core_filters %} {# Add this line #}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   
+  <meta charset="UTF-8" />
+   
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Green Cycle Profile</title>
+   
+  <link rel="stylesheet" href="{% static 'core/profile.css' %}">
+</head>
+
+<body>
+    <h1>Welcome, {{ user.username }}</h1>
+    <nav>
+        <a href="{% url 'login' %}">Home</a>
+        <a href="{% url 'order_veggies' %}">Order Veggies</a>
+        <a href="{% url 'compost_exchange' %}">Compost Exchange</a>
+        <a href="{% url 'logout_page' %}">Logout</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        <a href="{% url 'profile' %}" aria-current="page" style="color:#a8e063;">Profile</a>
+      </nav>
+    <main>
+        <section class="profile-card" aria-label="User Profile">
+            <img src="{% static 'core/profile.avif' %}" alt="Profile picture" class="profile-pic" id="profilePic"
+        tabindex="0" aria-describedby="uploadHint" />
+
+            <h1 id="displayName">{{user.username}}</h1>
+            {# Access user's address from UserProfile directly #}
+            <div class="address" id="displayEmail">
+        Address: {{ user.userprofile.address|default:"(No address provided)" }}
+      </div>
+          </section>
+
+        <div class="order-section">
+            <h2>Your Orders</h2>
+            {% if orders %}
+              {% for order in orders %}
+      <div class="order-item">
+        <div class="order-header">
+          <h3>Order #{{ order.id }}</h3>
+          <div class="order-date">{{ order.created_at|date:"Y-m-d H:i" }}</div>
+        </div>
+
+        <div class="order-address">
+          Address: {{ order.address|default:"(Not recorded for this order)" }}
+        </div>
+
+        <div class="order-summary">
+          <p><span>Original Total:</span> <span class="price-value">₹{{ order.total_price|floatformat:2 }}</span></p>
+          {% if order.discount_applied > 0 %}
+          <p><span>Discount Applied:</span> <span class="discount-value">- ₹{{ order.discount_applied|floatformat:2}}</span></p>
+          {% endif %}
+          <p class="final-total"><span>Final Total:</span> <span class="price-value">₹{{order.total_price| sub:order.discount_applied|floatformat:2 }}</span></p>
+        </div>
+
+        <div class="order-details">
+          <ul>
+            {% for item in order.items.all %}
+            <li>
+              {{ item.product.name }} (x{{ item.quantity }}) – <span class="item-price">₹{{ item.price|floatformat:2}}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endfor %}
+
+            {% else %}
+              <p>You have no orders yet.</p>
+            {% endif %}
+         
+    </div>
+      </main>
+
+    <input type="file" id="fileInput" accept="image/*" style="display:none" aria-hidden="true" />
+
+   
+  <script>
+    const profilePic = document.getElementById('profilePic');
+    const fileInput = document.getElementById('fileInput');
+    const displayName = document.getElementById('displayName');
+    const displayEmail = document.getElementById('displayEmail');
+
+    // Allow clicking or pressing Enter on profile image to open file dialog
+    profilePic.addEventListener('click', () => fileInput.click());
+    profilePic.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+
+    fileInput.addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (file) {
+        if (!file.type.startsWith('image/')) {
+          alert('Please select a valid image file.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          profilePic.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+
+</html>

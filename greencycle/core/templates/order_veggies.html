@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Fresh Greens</title>
+  <link rel="stylesheet" href="{% static 'core/order_veggies.css' %}">
+
+</head>
+
+<body>
+  <header>Green Cycle – Order Fresh Greens</header>
+
+  <nav>
+    <a href="{% url 'login' %}">Home</a>
+    <a href="{% url 'order_veggies' %}">Order Veggies</a>
+    <a href="{% url 'compost_exchange' %}">Compost Exchange</a>
+    <a href="{% url 'logout_page' %}">Logout</a>
+    <a href="{% url 'signup' %}">Signup</a>
+    <a href="{% url 'profile' %}">Profile</a>
+  </nav>
+
+  <main>
+    <section id="catalog">
+      {% for product in products %}
+      <div class="product-card">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy" />
+        <div>{{ product.name }} - per {{ product.unit }}</div>
+        <div class="product-price">₹{{ product.price }}</div>
+        <form method="post" action="{% url 'add_to_cart' %}">
+          {% csrf_token %}
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <input type="number" name="quantity" value="1" min="1">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+      {% empty %}
+      <p>No products available at the moment.</p>
+      {% endfor %}
+    </section>
+
+    <aside class="cart" aria-label="Shopping cart">
+      <h2>Your Cart</h2>
+      <div class="cart-items" id="cartItems">
+        {% if cart_items %}
+        {% for item in cart_items %}
+        <div class="cart-item">
+          <div>{{ item.product.name }}</div>
+          <div>x{{ item.quantity }}</div>
+          <div>₹{{ item.total_price }}</div>
+          <form method="post" action="{% url 'remove_from_cart' %}">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+            <button type="submit" class="remove-item">&times;</button>
+          </form>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Your cart is empty.</p>
+        {% endif %}
+      </div>
+      <div class="cart-total" id="cartTotal">Total: ₹{{ cart_total|default:"0.00" }}</div>
+      {% if cart_items %}
+      <form method="post" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <button type="submit" class="checkout-btn">Checkout</button>
+      </form>
+      {% endif %}
+      <form method="post" action="{% url 'clear_cart' %}">
+        {% csrf_token %}
+        <button type="submit" class="clear-cart" id="clearCartBtn">Clear Cart</button>
+      </form>
+    </aside>
+  </main>
+</body>
+
+</html>

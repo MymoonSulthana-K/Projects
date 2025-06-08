@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Green Cycle</title>
+    <link rel="stylesheet" href="{% static 'core/homepage.css' %}" />
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'login' %}">Home</a>
+        <a href="{% url 'order_veggies' %}">Order Veggies</a>
+        <a href="{% url 'compost_exchange' %}">Compost Exchange</a>
+        <a href="{% url 'logout_page' %}">Logout</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        <a href="{% url 'profile' %}">Profile</a>
+    </nav>
+    <main>
+        <div class="login-card" role="main" aria-labelledby="welcome-title">
+            <h1 id="welcome-title">Welcome to Green Cycle</h1>
+            <p class="summary">
+                Green Cycle helps you access fresh, organic vegetables and fruits directly from local farms and provides
+                a platform
+                to exchange compost with your community for a healthier planet.
+            </p>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+            </form>
+
+        </div>
+    </main>
+</body>
+
+</html>

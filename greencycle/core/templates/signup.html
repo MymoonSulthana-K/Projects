@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Signup | GreenCycle</title>
+    <link rel="stylesheet" href="{% static 'core/signup.css' %}">
+</head>
+
+<body>
+    <nav>
+        <a href="{% url 'login' %}">Home</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        <a href="{% url 'login' %}">Login</a>
+    </nav>
+    <main>
+        <div class="login-card">
+            <h1>Signup</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password1.id_for_label }}">Password</label>
+                    {{ form.password1 }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                    {{ form.password2 }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.address.id_for_label }}">Address</label>
+                    {{ form.address }}
+                </div>
+                <button type="submit">Create Account</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
