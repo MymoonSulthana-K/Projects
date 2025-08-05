@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Compost Exchange | GreenCycle</title>
+    <link rel="stylesheet" href="{% static 'core/compost_exchange.css' %}">
+</head>
+<body>
+    <header>Green Cycle – Compost Exchange</header> {# Added header for visual consistency #}
+    <nav>
+        <a href="{% url 'login' %}">Home</a>
+        <a href="{% url 'order_veggies' %}">Order Veggies</a>
+        <a href="{% url 'compost_exchange' %}">Compost Exchange</a>
+        <a href="{% url 'logout_page' %}">Logout</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        <a href="{% url 'profile' %}">Profile</a>
+    </nav>
+    <main>
+        <div class="exchange-card">
+            <h1>Compost Exchange</h1>
+
+            {% if success_message %}
+                <div class="success-message">{{ success_message }}</div>
+            {% endif %}
+
+            <div class="credits-display">
+                <h2>Your Redeemable Credits</h2>
+                <div class="total-credits-value">₹{{ total_credits|default:"0" }}</div>
+                <p>Once your compost exchange is verified, You can use these credits as discounts on your fresh greens orders!</p>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Compost for Pickup</button>
+            </form>
+
+            <div class="credits-info">
+                <h2>How Credits Are Calculated</h2>
+                <table class="credits-table">
+                    <thead>
+                        <tr>
+                            <th>Compost Amount (kg)</th>
+                            <th>Base Credits Earned</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0.5</td><td>2</td></tr>
+                        <tr><td>1</td><td>5</td></tr>
+                        <tr><td>2</td><td>11</td></tr>
+                        <tr><td>5</td><td>30</td></tr>
+                        <tr><td>10+</td><td>70</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 0.9em; color: #666; margin-top: 1rem;">*Credits are approximate and subject to verification upon pickup.</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

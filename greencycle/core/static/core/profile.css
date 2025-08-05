@@ -1,0 +1,344 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+/* Added 700 weight */
+
+/* Root variables for consistent colors */
+:root {
+    --primary-green: #3a6e1a;
+    --secondary-green: #56ab2f;
+    --light-green: #e7f3de;
+    --extra-light-green: #f0f9ef;
+    --dark-green-text: #233d15;
+    --medium-green-text: #4b7842;
+    --border-grey: #ccc;
+    --light-grey-bg: #f9f9f9;
+    --white: #ffffff;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+    --shadow-dark: rgba(0, 0, 0, 0.2);
+}
+
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--extra-light-green);
+    color: var(--dark-green-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: var(--primary-green);
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+    /* Ensure this is used */
+    user-select: text;
+}
+
+h2 {
+    color: var(--primary-green);
+    /* Changed from 3a6e1a for consistency */
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--secondary-green);
+    /* Changed to secondary-green */
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.4rem;
+    color: var(--primary-green);
+    margin: 0;
+}
+
+h4 {
+    font-size: 1.2rem;
+    color: var(--medium-green-text);
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px dashed var(--light-green);
+    /* Lighter separator */
+    padding-bottom: 0.4rem;
+}
+
+
+nav {
+    background-color: rgba(34, 61, 21, 0.85);
+    /* Consider using a direct color like #223D15 if you prefer */
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: #d6f5d6;
+    text-decoration: none;
+    margin: 0 1.5rem;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+nav a:hover {
+    color: #f0fff0;
+}
+
+nav a::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: #d6f5d6;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    min-height: calc(100vh - 56px);
+    /* Adjust based on your nav height */
+}
+
+.profile-card {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--shadow-medium);
+    max-width: 440px;
+    width: 50%;
+    padding: 2rem 2rem;
+    text-align: center;
+    /* animation: fadeIn 1s ease forwards; */
+    /* Re-add if you have @keyframes fadeIn */
+    box-sizing: border-box;
+}
+
+.profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--secondary-green);
+    margin-bottom: 1.2rem;
+    background-color: var(--light-green);
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+}
+
+.profile-pic:hover {
+    box-shadow: 0 0 12px 4px var(--secondary-green);
+}
+
+.address {
+    font-size: 1rem;
+    color: var(--medium-green-text);
+    margin-bottom: 1.8rem;
+    user-select: text;
+}
+
+.order-section {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.order-item {
+    border: 1px solid var(--border-grey);
+    padding: 1.2em;
+    /* Increased padding */
+    margin-bottom: 1.5em;
+    /* Increased margin between orders */
+    border-radius: 8px;
+    background-color: var(--light-grey-bg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow for each item */
+}
+
+/* New/Updated Styles for Order Item Layout */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--light-green);
+    /* Lighter border */
+}
+
+.order-header h3 {
+    margin: 0;
+    color: var(--primary-green);
+}
+
+.order-date {
+    font-size: 0.9em;
+    color: var(--medium-green-text);
+    font-style: italic;
+}
+
+.order-address {
+    font-size: 0.95rem;
+    color: var(--medium-green-text);
+    margin-bottom: 1rem;
+}
+
+.order-summary p {
+    margin: 0.4em 0;
+    /* Tighten line spacing */
+    font-size: 1rem;
+    display: flex;
+    /* Use flex to align text and values */
+    justify-content: space-between;
+}
+
+.order-summary p span {
+    font-weight: 600;
+}
+
+.order-summary .price-value {
+    color: var(--primary-green);
+}
+
+.order-summary .discount-value {
+    color: #d32f2f;
+    /* Red for discount */
+}
+
+.order-summary .final-total {
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-top: 1px dashed var(--light-green);
+    /* Separator for final total */
+    padding-top: 0.5rem;
+    margin-top: 0.8rem;
+}
+
+.order-details ul {
+    list-style-type: disc;
+    /* Use bullets for items */
+    padding-left: 1.5rem;
+    /* Indent the list */
+    margin-top: 0.5rem;
+}
+
+.order-details li {
+    margin-bottom: 0.3rem;
+    /* Spacing between list items */
+    font-size: 0.95rem;
+    color: var(--dark-green-text);
+}
+
+.item-price {
+    font-weight: 500;
+    color: var(--primary-green);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    nav {
+        flex-wrap: wrap;
+        /* Allow nav items to wrap */
+        gap: 0.8rem;
+        /* Space between wrapped items */
+        padding: 0.8rem 1rem;
+    }
+
+    nav a {
+        margin: 0 0.8rem;
+    }
+
+    main {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .profile-card {
+        width: 90%;
+        /* Wider on smaller screens */
+        padding: 1.5rem 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .order-section {
+        padding: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    .order-item {
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+
+    .order-header {
+        flex-direction: column;
+        /* Stack order ID and date */
+        align-items: flex-start;
+    }
+
+    .order-date {
+        margin-top: 0.2rem;
+    }
+
+    .order-summary p {
+        flex-direction: column;
+        /* Stack price details vertically */
+        align-items: flex-start;
+    }
+
+    .order-summary p span {
+        margin-top: 0.2em;
+        /* Space out stacked values */
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-card {
+        padding: 1.2rem 1rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .order-details ul {
+        padding-left: 1rem;
+    }
+
+    .order-details li {
+        font-size: 0.9rem;
+    }
+}

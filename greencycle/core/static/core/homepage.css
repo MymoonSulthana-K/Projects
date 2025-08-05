@@ -1,0 +1,200 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('background.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar styling */
+        nav {
+            background-color: rgba(34, 61, 21, 0.85);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            color: #d6f5d6;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: #f0fff0;
+        }
+
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0%;
+            height: 2px;
+            background-color: #d6f5d6;
+            transition: width 0.3s;
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Main container styles */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Login card */
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem 2.5rem;
+            text-align: center;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .login-card h1 {
+            font-size: 2.4rem;
+            color: #3a6e1a;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .login-card p.summary {
+            color: #4b7842;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 2px solid #a8e063;
+            outline-offset: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #56ab2f;
+            outline: none;
+        }
+
+        button {
+            padding: 0.85rem;
+            font-size: 1.1rem;
+            background: #56ab2f;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(86, 171, 47, 0.7);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a6e1a;
+            box-shadow: 0 6px 15px rgba(58, 110, 26, 0.9);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About section styles */
+        .about-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            padding: 2rem;
+            margin-top: 10rem;
+            text-align: center;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: #3a6e1a;
+            margin-bottom: 1rem;
+        }
+
+        .about-section p {
+            color: #4b7842;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Responsive */
+        @media (max-width: 460px) {
+            nav a {
+                margin: 0 0.8rem;
+                font-size: 1rem;
+            }
+
+            .login-card {
+                padding: 1.6rem 2rem;
+            }
+
+            .login-card h1 {
+                font-size: 2rem;
+            }
+
+            .about-section {
+                padding: 1.5rem;
+            }
+
+            .about-section h2 {
+                font-size: 1.5rem;
+            }
+        }

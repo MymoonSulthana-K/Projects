@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logged Out - GreenCycle</title>
+    <link rel="stylesheet" href="{% static 'core/homepage.css' %}">
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f0fff4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .logout-box {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 128, 0, 0.2);
+            text-align: center;
+        }
+
+        .logout-box h2 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+        }
+
+        .logout-box a {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #4caf50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-box a:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="logout-box">
+    <h2>Are you sure you want to log out?</h2>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Confirm Logout</button>
+    </form>
+    <a href="{% url 'login' %}">Cancel</a>
+</div>
+</body>
+</html>

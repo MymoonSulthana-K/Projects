@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Confirmation</title>
+    <link rel="stylesheet" href="{% static 'core/order_confirmation.css' %}">
+</head>
+
+<body>
+    <header>Green Cycle – Order Confirmation</header>
+
+    <nav>
+        <a href="{% url 'login' %}">Home</a>
+        <a href="{% url 'order_veggies' %}">Order Veggies</a>
+        <a href="{% url 'compost_exchange' %}">Compost Exchange</a>
+        <a href="{% url 'logout_page' %}">Logout</a>
+        <a href="{% url 'signup' %}">Signup</a>
+        <a href="{% url 'profile' %}">Profile</a>
+    </nav>
+
+    <main>
+        <div class="confirmation-message">Thank you for your order! Your Order ID is: <strong>#{{ order.id }}</strong> </div>
+
+        <div class="shipping-address">
+            <h2>Shipping Address</h2>
+            <p>{{ address }}</p>
+        </div>
+        <div class = "Payment Mode">
+                <span>Payment Mode: Cash on Delivery</span>
+            </div>
+
+        <div class="order-details">
+            
+            <h2>Order Summary</h2>
+            {% for item in cart_items %} {# This will now be 'order_items' from the context #}
+            <div class="order-item">
+                <div>{{ item.product.name }} (x{{ item.quantity }})</div>
+                <div>₹{{ item.price | floatformat:2 }}</div> {# Use item.price which is the price at order time #}
+            </div>
+            {% endfor %}
+
+            <div class="order-summary-line">
+                <span>Subtotal:</span>
+                <span>₹{{ order.total_price | floatformat:2 }}</span>
+            </div>
+            {% if discount_applied > 0 %}
+            <div class="order-discount">
+                <span>Discount Applied (Credits Used):</span>
+                <span>- ₹{{ discount_applied | floatformat:2 }}</span>
+            </div>
+            {% endif %}
+            <div class="order-total">
+                <span>Final Total:</span>
+                <span>₹{{ cart_total | floatformat:2 }}</span> {# This is already the final calculated total #}
+            </div>
+            
+        </div>
+
+        <div class="button-group">
+            <a href="{% url 'order_veggies' %}" class="button">Continue Shopping</a>
+            <a href="{% url 'profile' %}" class="button">View Profile</a>
+        </div>
+    </main>
+</body>
+
+</html>
